@@ -4,7 +4,12 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
+import java.util.*
+import kotlin.concurrent.thread
+import kotlin.concurrent.timer
+import kotlin.system.measureTimeMillis
 
 /*
 * Note :
@@ -34,5 +39,39 @@ class Coroutine {
         }
         println(name)
         println("Selesai")
+    }
+
+    @Test
+    fun threadTimeTest() {
+        val time = measureTimeMillis {
+            repeat(10000) {
+                thread {
+                    Thread.sleep(1000)
+                    println("Done : $it ${Thread.currentThread().name} ${Date()}")
+                }
+            }
+        }
+        println("Menunggu")
+        Thread.sleep(2000)
+        println("Total time : $time") // Memakan waktu sekitar 3 detik lebih
+        println("Selesai")
+    }
+
+    @Test
+    fun coroutineTimeTest() {
+        val time = measureTimeMillis {
+            repeat(10000) {
+                GlobalScope.launch {
+                    delay(1000)
+                    println("Done : $it ${Thread.currentThread().name} ${Date()}")
+                }
+            }
+        }
+            println("Menunggu")
+            runBlocking {
+                delay(2000)
+                println("Total Time : $time") // Memakan waktu sekitar 1936 detik
+            }
+            println("Selesai")
     }
 }
