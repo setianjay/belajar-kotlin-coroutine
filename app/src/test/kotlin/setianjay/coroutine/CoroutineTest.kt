@@ -21,7 +21,7 @@ import kotlin.system.measureTimeMillis
 *
 * delay() = fungsinya sama seperti Thread.sleep(), yaitu untuk menunda proses kalkulasi pada Thread.*/
 
-class Coroutine {
+class CoroutineTest {
     private var name = ""
     fun hello() {
         name = "Hari Setiaji"

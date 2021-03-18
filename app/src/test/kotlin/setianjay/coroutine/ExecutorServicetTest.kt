@@ -18,7 +18,7 @@ import java.util.concurrent.Executors
 * proses nya
 * */
 
-class ExecutorService {
+class ExecutorServicetTest {
 
     @Test
     fun singleThreadPoolTest() {
